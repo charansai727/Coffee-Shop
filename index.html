@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Coffee Shop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>☕ Coffee Shop</h1>
+
+  <div id="menu">
+    {% for coffee in menu %}
+      <div class="item">
+        <p>{{ coffee.name }} - ${{ coffee.price }}</p>
+        <button onclick="addToOrder({{ coffee.id }})">Add</button>
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Your Order</h2>
+  <div id="order"></div>
+  <button onclick="checkout()">Checkout</button>
+
+  <!-- ✅ Checkout Modal -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Confirm Checkout</h3>
+      <p id="checkoutDetails"></p>
+      <button onclick="confirmCheckout()">Confirm</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
